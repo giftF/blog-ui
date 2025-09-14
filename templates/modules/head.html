@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<!-- 做成head，引入配置 -->
+
+<head th:fragment="head(title)">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  <meta content="#f7f7f7" media="(prefers-color-scheme: light)" name="theme-color" />
+  <meta content="#1b1b1e" media="(prefers-color-scheme: dark)" name="theme-color" />
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+    name="viewport" />
+
+  <title th:if="${#strings.isEmpty(title)}" th:text="${site.title}"></title>
+  <title th:if="${!#strings.isEmpty(title)}" th:text="${title}+' - '+ ${site.title}"></title>
+  <!--展示modules/import文件中做成的import模块-->
+  <th:block th:replace="~{modules/import :: import()}"></th:block>
+  <!--展示modules/mode-toggle文件中做成的mode_toggle模块-->
+  <th:block th:replace="~{modules/mode-toggle :: mode_toggle()}"></th:block>
+
+  <style>
+    /* 相册容器 */
+    .album-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      /* 相册间距 */
+    }
+
+    /* 单个相册封面 */
+    .album-item {
+      position: relative;
+      /* 使文字可以绝对定位在图片上 */
+      width: 150px;
+      /* 封面宽度，可根据需要调整 */
+      cursor: pointer;
+      border-radius: 8px;
+      /* text-align: center; */
+      /* transition: transform 0.3s, box-shadow 0.3s; */
+      overflow: hidden;
+      /* 避免文字溢出 */
+    }
+
+    /* 鼠标悬停效果 */
+    .album-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 封面图片 */
+    .album-cover {
+      width: 100%;
+      aspect-ratio: 1/1;
+      /* 保持正方形 */
+      border-radius: 8px;
+      object-fit: cover;
+      background-color: #ccc;
+      /* 占位背景色 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: bold;
+      color: white;
+      /* object-fit: cover;
+        display: block; */
+    }
+
+    /* 相册标题 */
+    .album-title {
+      /* margin-top: 0.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        word-break: break-word;  */
+      position: absolute;
+      bottom: 0;
+      /* 图片底部 */
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      padding: 0.3rem 0;
+      background: rgba(0, 0, 0, 0.5);
+      /* 半透明背景 */
+      box-sizing: border-box;
+    }
+
+
+
+    #cont {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .ima {
+      width: 100px;
+      padding: 1rem;
+      margin: 1rem;
+      background-color: #D7CCC8;
+      transition: transform 0.8s;
+      -webkit-transform: transform 0.8s;
+    }
+
+    .imamax {
+      width: 600px;
+      padding: 1rem;
+      margin: 1rem;
+      background-color: #D7CCC8;
+      transition: transform 0.8s;
+      -webkit-transform: transform 0.8s;
+    }
+
+    .ima:hover {
+      transform: scale(1.5) rotate(0deg) !important;
+    }
+
+    /* 灯箱样式 */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      text-align: center;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      margin-top: 5%;
+    }
+
+    .lightbox .close {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+    }
+
+    .lightbox .prev,
+    .lightbox .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 60px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 20px;
+      user-select: none;
+    }
+
+    .lightbox .prev {
+      left: 0;
+    }
+
+    .lightbox .next {
+      right: 0;
+    }
+  </style>
+  <script>
+    let currentIndex = 0
+    let photoUrls = []
+
+    function openLightbox (index) {
+      const images = document.querySelectorAll(".gallery img")
+      photoUrls = Array.from(images).map(img => img.src)
+      currentIndex = index
+      document.getElementById("lightbox-img").src = photoUrls[currentIndex]
+      document.getElementById("lightbox").style.display = "block"
+    }
+
+    function closeLightbox () {
+      document.getElementById("lightbox").style.display = "none"
+    }
+
+    function changePhoto (step) {
+      currentIndex += step
+      if (currentIndex < 0) currentIndex = photoUrls.length - 1
+      if (currentIndex >= photoUrls.length) currentIndex = 0
+      document.getElementById("lightbox-img").src = photoUrls[currentIndex]
+    }
+  </script>
+
+
+</head>
+
+</html>

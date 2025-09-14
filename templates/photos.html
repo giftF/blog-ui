@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+  th:replace="~{modules/layout :: html (title = '相册', content = ~{::content}, layout = 'page' ,breadcrumb = ~{::breadcrumb})}"
+  xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="breadcrumb">
+  <span>
+    <a href="/">[[#{breadcrumb.home}]]</a>
+  </span>
+  <span>相册</span>
+</th:block>
+
+<th:block th:fragment="content">
+  <h1>相册</h1>
+
+  <div class="container main-container flex on-phone--column extended">
+    <main class="main full-width">
+      <div class="album-container">
+        <th:block th:each="group : ${photoFinder.groupBy()}">
+          <a th:href="@{/photo(id=${group.metadata.name},name=${group.spec.displayName})}">
+            <div class="album-item">
+              <img th:if="${group.photos.size > 0}" class="album-cover" th:src="${group.photos[0].spec.url}" th:alt="${group.spec.displayName}">
+              <img th:if="${group.photos.size == 0}" class="album-cover" th:src="@{/assets/img/nothin.jpeg}" th:alt="${group.spec.displayName}">
+              <div class="album-title">[[${group.spec.displayName}]]</div>
+            </div>
+          </a>
+        </th:block>
+      </div>
+    </main>
+  </div>
+</th:block>
+
+</html>

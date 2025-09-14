@@ -1,0 +1,299 @@
+# nonk8s
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: blog-ui-setting
+spec:
+  forms:
+    - group: basics
+      label: 全局设置
+      formSchema:
+        - $formkit: radio
+          name: enable_site_info
+          label: 站点信息开关
+          value: false
+          help: 右侧侧栏下方是否显示站点信息(页脚)
+          options:
+            - label: 开启
+              value: true
+            - label: 关闭
+              value: false
+        - $formkit: text
+          name: copyrightAgreement
+          label: 版权协议
+          value: "CC BY 4.0"
+        - $formkit: url
+          name: copyrightAgreementUrl
+          label: 版权协议地址
+          placeholder: 请输入版权协议地址
+          value: "https://creativecommons.org/licenses/by/4.0/"
+        - $formkit: text
+          name: footerCopyrightAgreement
+          label: 页脚版权协议
+          value: "Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author."
+          help: 页脚 "All rights reserved" 浮现时显示的版权协议
+
+    - group: sidebar
+      label: 侧栏
+      formSchema:
+        - $formkit: repeater
+          name: socials
+          label: 社交链接
+          value:
+            - icon: fab fa-github
+              url: https://github.com/airbozh
+            - icon: fab fa-twitter
+              url: https://twitter.com/
+            - icon: fas fa-envelope
+              url: mailto:i@airbozh.cn
+            - icon: fas fa-rss
+              url: /feed.xml
+          max: 5
+          children:
+            - $formkit: text
+              name: icon
+              label: 图标
+              value: ""
+              required: true
+            - $formkit: text
+              name: url
+              label: 链接
+              value: ""
+              required: true
+
+    - group: post
+      label: 文章
+      formSchema:
+        - $formkit: repeater
+          name: share
+          label: 分享设置
+          value:
+            - name: Telegram
+              icon: fa-fw fab fa-telegram
+              url: https://t.me/share/url?url=@URL
+            - name: Facebook
+              icon: fa-fw fab fa-facebook-square
+              url: https://www.facebook.com/sharer/sharer.php?u=@URL
+            - name: Twitter
+              icon: fa-fw fa-brands fa-square-x-twitter
+              url: https://twitter.com/intent/tweet?&url=@URL
+          max: 5
+          children:
+            - $formkit: text
+              name: name
+              label: 名称
+              value: ""
+              required: true
+            - $formkit: text
+              name: icon
+              label: 图标
+              value: ""
+              required: true
+            - $formkit: text
+              name: url
+              label: 链接
+              value: ""
+              required: true
+
+    - group: resume_personal_information
+      label: 简历-个人信息
+      formSchema:
+        - $formkit: radio
+          name: site_info
+          label: 是否展示个人信息
+          value: false
+          help: 定义是否在页面展示个人信息
+          options:
+            - label: 展示
+              value: true
+            - label: 不展示
+              value: false
+        - $formkit: text
+          name: phone
+          label: 联系方式
+          value: ""
+        - $formkit: text
+          name: mail
+          label: 邮箱
+          value: ""
+        - $formkit: text
+          name: base
+          label: 城市
+          value: ""
+        - $formkit: text
+          name: birthday
+          label: 生日
+          value: ""
+
+    - group: resume_strengths
+      label: 简历-个人优势
+      formSchema:
+        - $formkit: radio
+          name: site_info
+          label: 是否展示个人优势
+          value: false
+          help: 定义是否在页面展示个人优势
+          options:
+            - label: 展示
+              value: true
+            - label: 不展示
+              value: false
+        - $formkit: repeater
+          name: resume_strengths_list
+          label: 个人优势
+          value: []
+          children:
+            - $formkit: text
+              name: value
+              label: 内容
+              value: ""
+
+    - group: resume_wrk_experience
+      label: 简历-工作经历
+      formSchema:
+        - $formkit: radio
+          name: site_info
+          label: 是否展示工作经历
+          value: false
+          help: 定义是否在页面展示工作经历
+          options:
+            - label: 展示
+              value: true
+            - label: 不展示
+              value: false
+        - $formkit: repeater
+          name: list
+          label: 工作经历
+          value: [ ]
+          children:
+            - $formkit: select
+              name: enabled
+              id: enabled
+              label: 是否展示该工作经历
+              options:
+                - label: 展示
+                  value: true
+                - label: 隐藏
+                  value: false
+            - $formkit: text
+              name: employer
+              label: 公司名称
+              value: ""
+            - $formkit: text
+              name: position
+              label: 职位
+              value: ""
+            - $formkit: text
+              name: duration
+              label: 在职时间
+              value: ""
+            - $formkit: text
+              name: city
+              label: 城市
+              value: ""
+            - $formkit: repeater
+              name: duties_list
+              label: 详情
+              value: [ ]
+              children:
+                - $formkit: text
+                  name: duties
+                  label: 详情
+                  value: ""
+
+    - group: resume_project_experience
+      label: 简历-项目经历
+      formSchema:
+        - $formkit: radio
+          name: site_info
+          label: 是否展示项目经历
+          value: false
+          help: 定义是否在页面展示项目经历
+          options:
+            - label: 展示
+              value: true
+            - label: 不展示
+              value: false
+        - $formkit: repeater
+          name: list
+          label: 项目经历
+          value: [ ]
+          children:
+            - $formkit: select
+              name: enabled
+              id: enabled
+              label: 是否展示该项目经历
+              options:
+                - label: 展示
+                  value: true
+                - label: 隐藏
+                  value: false
+            - $formkit: text
+              name: employer
+              label: 项目名称
+              value: ""
+            - $formkit: text
+              name: position
+              label: 职责/职位
+              value: ""
+            - $formkit: text
+              name: duration
+              label: 项目时间
+              value: ""
+            - $formkit: repeater
+              name: duties_list
+              label: 详情
+              value: [ ]
+              children:
+                - $formkit: text
+                  name: duties
+                  label: 详情
+                  value: ""
+
+    - group: resume_education
+      label: 简历-教育经历
+      formSchema:
+        - $formkit: radio
+          name: site_info
+          label: 是否展示教育经历
+          value: false
+          help: 定义是否在页面展示教育经历
+          options:
+            - label: 展示
+              value: true
+            - label: 不展示
+              value: false
+        - $formkit: repeater
+          name: list
+          label: 教育经历
+          value: [ ]
+          children:
+            - $formkit: select
+              name: enabled
+              id: enabled
+              label: 是否展示该教育经历
+              options:
+                - label: 展示
+                  value: true
+                - label: 隐藏
+                  value: false
+            - $formkit: text
+              name: employer
+              label: 学校名称
+              value: ""
+            - $formkit: text
+              name: position
+              label: 专业
+              value: ""
+            - $formkit: text
+              name: duration
+              label: 在读时间
+              value: ""
+            - $formkit: text
+              name: city
+              label: 城市
+              value: ""
+            - $formkit: text
+              name: honors
+              label: 荣誉
+              value: ""

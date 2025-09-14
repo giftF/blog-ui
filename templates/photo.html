@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html
+  th:replace="~{modules/layout :: html (title = '相册', content = ~{::content}, layout = 'photo' ,breadcrumb = ~{::breadcrumb})}"
+  xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="breadcrumb">
+  <span>
+    <a href="/">[[#{breadcrumb.home}]]</a>
+  </span>
+  <span>
+    <a href="/photos">相册</a>
+  </span>
+  <span>[[${param.name}]]</span>
+</th:block>
+
+<th:block th:fragment="content">
+  <h1 data-toc-skip>[[${param.name}]]</h1>
+  <div class="container main-container flex on-phone--column extended" style="display: table;">
+    <main class="main full-width">
+
+      <!-- 分页 -->
+      <!--      <th:block th:with="photos = ${photoFinder.list(1, 10, param.id)}">-->
+
+      <th:block th:with="photos = ${photoFinder.listBy(param.id)}">
+        <div id="cont" style="margin: 0;font-size: 0;display: table-cell;vertical-align: middle;text-align: center;">
+          <div class="gallery">
+            <th:block th:each="photo, index : ${photos}">
+              <img th:onclick="'openLightbox('+${index.index}+')'" th:src="${photo.spec.url}" class="ima"
+                th:style="${'transform: rotate(' + (T(java.lang.Math).random() * 90 - 45) + 'deg)'}">
+            </th:block>
+          </div>
+        </div>
+
+        <div class="lightbox" id="lightbox">
+          <span class="close" onclick="closeLightbox()">&times;</span>
+          <span class="prev" onclick="changePhoto(-1)">&#10094;</span>
+          <img id="lightbox-img" src="" alt="放大图">
+          <span class="next" onclick="changePhoto(1)">&#10095;</span>
+        </div>
+      </th:block>
+
+    </main>
+  </div>
+</th:block>
+
+</html>

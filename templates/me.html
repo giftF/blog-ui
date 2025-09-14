@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html
+  th:replace="~{modules/layout :: html (title = '自我介绍', content = ~{::content}, layout = 'page' ,breadcrumb = ~{::breadcrumb})}"
+  xmlns:th="https://www.thymeleaf.org">
+<th:block th:fragment="breadcrumb">
+  <span>
+    <a href="/">[[#{breadcrumb.home}]]</a>
+  </span>
+  <span>自我介绍</span>
+</th:block>
+
+<th:block th:fragment="content">
+  <h1 data-toc-skip>关于我</h1>
+  <div class="container" style="margin: 0 0 0.4rem 0;line-height: 1.2rem;">
+    <!--  个人信息  -->
+    <th:block th:if="${theme.config.resume_personal_information.site_info}"
+              th:with="data = ${theme.config.resume_personal_information}">
+      <!-- Basic Information -->
+      <section class="info-flex" style="display: flex;flex-wrap: wrap;">
+        <div class="details" style="flex: 3 1 300px;">
+          <p th:if="${not #strings.isEmpty(data.mail)}"><strong>Email:</strong> [[${data.mail}]]</p>
+          <p th:if="${not #strings.isEmpty(data.phone)}"><strong>联系方式:</strong> [[${data.phone}]]</p>
+          <p th:if="${not #strings.isEmpty(data.base)}"><strong>城市:</strong> [[${data.base}]]</p>
+          <p th:if="${not #strings.isEmpty(data.birthday)}"><strong>生日:</strong> [[${data.birthday}]]</p>
+        </div>
+      </section>
+      <hr style="border: 0; height: 2px; background-color: #333;">
+    </th:block>
+
+    <!-- Personal Strengths -->
+    <!--  个人优势  -->
+    <th:block th:if="${theme.config.resume_strengths.site_info}">
+      <section class="strengths">
+        <h2 style="font-weight: bold;">个人优势</h2>
+        <ul th:each="data : ${theme.config.resume_strengths.resume_strengths_list}">
+          <li>[[${data.value}]]</li>
+        </ul>
+      </section>
+      <hr style="border: 0; height: 2px; background-color: #333;">
+    </th:block>
+
+    <!-- Work Experience -->
+    <!--  工作经历  -->
+    <th:block th:if="${theme.config.resume_wrk_experience.site_info}">
+      <section class="work-experience">
+        <h2 style="font-weight: bold;">工作经历</h2>
+        <div th:each="data, iterStat : ${theme.config.resume_wrk_experience.list}">
+          <div class="job" th:if="${data.enabled}">
+            <h3>[[${data.employer}]]</h3>
+            <p style="font-size:0.5rem;color: rgba(0, 0, 0, 0.5);"><span class="sub-title">在职时间:</span> [[${data.duration}]] | <span class="sub-title">职位:</span> [[${data.position}]] | <span class="sub-title">城市:</span> [[${data.city}]]</p>
+            <p><span class="sub-title">岗位职责:</span></p>
+            <ul th:each="job : ${data.duties_list}">
+              <li>[[${job.duties}]]</li>
+            </ul>
+          </div>
+          <hr th:if="${not iterStat.last}" style="border: none; border-top: 2px dashed #000;"/>
+        </div>
+      </section>
+      <hr style="border: 0; height: 2px; background-color: #333;">
+    </th:block>
+
+    <!-- Project Experience -->
+    <!--  项目经历  -->
+    <th:block th:if="${theme.config.resume_project_experience.site_info}">
+      <section class="projects">
+        <h2 style="font-weight: bold;">项目经历</h2>
+        <div th:each="data, iterStat : ${theme.config.resume_project_experience.list}">
+          <div class="project" th:if="${data.enabled}">
+            <h3>[[${data.employer}]]</h3>
+            <p style="font-size:0.5rem;color: rgba(0, 0, 0, 0.5);"><span class="sub-title">职位/职责:</span> [[${data.position}]] | <span class="sub-title">项目时间:</span> [[${data.duration}]]</p>
+            <p><span class="sub-title">项目描述:</span></p>
+            <ul th:each="msg : ${data.duties_list}">
+              <li>[[${msg.duties}]]</li>
+            </ul>
+          </div>
+          <hr th:if="${not iterStat.last}" style="border: none; border-top: 2px dashed #000;"/>
+        </div>
+      </section>
+      <hr style="border: 0; height: 2px; background-color: #333;">
+    </th:block>
+
+    <!-- Education -->
+    <!--  教育经历  -->
+    <th:block th:if="${theme.config.resume_education.site_info}">
+      <section class="education">
+        <h2 style="font-weight: bold;">教育经历</h2>
+        <div th:each="data, iterStat : ${theme.config.resume_education.list}">
+          <div class="education-item" th:if="${data.enabled}">
+            <h3>[[${data.employer}]]</h3>
+            <p><span class="sub-title">专业:</span> [[${data.position}]]</p>
+            <p><span class="sub-title">城市:</span> [[${data.city}]]</p>
+            <p><span class="sub-title">就读时间:</span> [[${data.duration}]]</p>
+            <p th:if="${not #strings.isEmpty(data.honors)}"><span class="sub-title">荣誉:</span> [[${data.honors}]]</p>
+          </div>
+          <hr th:if="${not iterStat.last}" style="border: none; border-top: 2px dashed #000;"/>
+        </div>
+      </section>
+    </th:block>
+  </div>
+</th:block>
+
+</html>

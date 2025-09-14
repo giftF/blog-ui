@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+  <!-- The Side Bar -->
+  <!--做成sidebar模块-->
+  <aside th:fragment="sidebar()" aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+    <header class="profile-wrapper">
+      <a class="rounded-circle" href="/" id="avatar">
+        <!--    判断，如果site.logo存在内容，展示logo，后台 设置--基本设置--Logo 中设置    -->
+        <th:block th:if="${not #strings.isEmpty(site.logo)}">
+          <img th:src="${site.logo}" width="112" height="112" alt="avatar" />
+        </th:block>
+        <!--    判断，如果site.logo不存在内容，展示site.title，后台 设置--基本设置--站点标题 中设置    -->
+        <th:block th:if="${#strings.isEmpty(site.logo)}">
+          <p th:text="${#strings.substring(site.title,0,1)}" />
+        </th:block>
+      </a>
+
+      <!--   展示站点标题，后台 设置--基本设置--站点标题 中设置   -->
+      <h1 class="site-title">
+        <a href="/">[[${site.title}]]</a>
+      </h1>
+      <!--   展示站点副标题，没有的话展示默认内容，后台 设置--基本设置--站点副标题 中设置   -->
+      <p class="site-subtitle fst-italic">
+        [[${#strings.isEmpty(site.subtitle)} ? 'A text-focused Halo theme' :
+        ${site.subtitle}]]
+      </p>
+    </header>
+    <!-- .profile-wrapper -->
+    <!--  左侧导航菜单做成  -->
+    <!--定义一个局部变量menuItems，调用java方法menuFinder.getPrimary().menuItems-->
+    <nav class="nav flex-column flex-grow-1 w-100 ps-0" th:with="menuItems = ${menuFinder.getPrimary().menuItems}">
+      <ul class="nav">
+        <!--    遍历menuItem，在后台 菜单 中设置    -->
+        <li th:class="nav-item" th:each="menuItem : ${menuItems}">
+          <!--    后台 菜单--常规--链接地址 中设置      -->
+          <a
+            class="nav-link"
+            th:href="@{${menuItem.status.href}}"
+            th:target="${menuItem.spec.target?.value}"
+            th:with="icon = ${#annotations.get(menuItem, 'icon')}"
+          >
+            <!--      后台 菜单--元数据--图标 中设置      -->
+            <i
+              class="fa-fw fas fa-bars-staggered"
+              th:if="${#strings.isEmpty(icon)}"
+            ></i>
+            <i
+              th:class="${'fa-fw ' + icon}"
+              th:if="${not #strings.isEmpty(icon)}"
+            ></i>
+            <!--      后台 菜单--常规--名称 中设置      -->
+            <span>[[${menuItem.status.displayName}]]</span>
+          </a>
+        </li>
+
+        <!-- .nav-item -->
+      </ul>
+    </nav>
+    <!-- ul.nav.flex-column -->
+    <!--左下角图标集合做成-->
+    <div class="sidebar-bottom d-flex flex-wrap align-items-center w-100">
+      <!--  黑白切换按钮  -->
+      <button class="mode-toggle btn" aria-label="Switch Mode">
+        <i class="fas fa-adjust"></i>
+      </button>
+      <!--社交链接图标追加-->
+      <!--   判断theme.config.sidebar.socials是否存在，存在则追加图标   -->
+      <!--   后台 主题--侧栏--社交链接 中设置   -->
+      <th:block th:if="${not #arrays.isEmpty(theme.config.sidebar.socials)}">
+        <!--    追加图标前，展示一个・分隔    -->
+        <span class="icon-border"></span>
+        <!--    遍历后台设置的社交链接做成图标    -->
+        <th:block th:each="entry : ${theme.config.sidebar.socials}">
+          <a th:href="${entry.url}">
+            <i th:class="${entry.icon}"></i>
+          </a>
+        </th:block>
+      </th:block>
+    </div>
+    <!-- .sidebar-bottom -->
+  </aside>
+  <!-- #sidebar -->
+</html>

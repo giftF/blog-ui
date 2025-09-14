@@ -1,0 +1,36 @@
+# nonk8s
+apiVersion: theme.halo.run/v1alpha1
+kind: Theme
+metadata:
+  name: blog-ui
+  annotations:
+    # Add supports for Halo App Store
+    # https://halo.run/store/apps/app-vGuQB
+    "store.halo.run/app-id": "app-vGuQB"
+spec:
+  customTemplates:
+    page:
+      - name: 我
+        description: 个人简介页面
+        screenshot:
+        file: me.html
+      - name: 相册
+        description: 相册分组页面
+        screenshot:
+        file: photos.html
+      - name: 单个相册
+        description: 相册页面
+        screenshot:
+        file: photo.html
+  displayName: Chirpy
+  author:
+    name: gift
+    website: https://airbozh.cn
+  description: A minimal, responsive and feature-rich Halo theme for technical writing.
+  logo: https://chirpy-img.netlify.app/commons/avatar.jpg
+  website: https://github.com/AirboZH/halo-theme-chirpy
+  repo: https://github.com/AirboZH/halo-theme-chirpy.git
+  settingName: "halo-theme-chirpy-setting"
+  configMapName: "halo-theme-chirpy-configMap"
+  version: 1.4.9
+  require: ">=2.0.0"

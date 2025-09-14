@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+  <!--加载css和js文件-->
+  <th:block th:fragment="import()">
+   <link
+      rel="stylesheet"
+      th:href="@{/assets/dist/main.css?v={version}(version=${theme.spec.version})}"
+    />
+    <script
+      th:src="@{/assets/dist/main.js?v={version}(version=${theme.spec.version})}"
+      type="module"
+    ></script>
+  </th:block>
+</html>

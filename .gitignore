@@ -1,0 +1,83 @@
+# ==========================
+# Node.js / 前端
+# ==========================
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+*.lock       # 临时锁文件，保留 package-lock.json / yarn.lock / pnpm-lock.yaml
+
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite
+*.sqlite3
+*.db
+Pipfile.lock    # 锁定依赖文件，需要提交
+poetry.lock     # 锁定依赖文件，需要提交
+*.env
+*.pyenv
+.venv/
+env/
+venv/
+
+# ==========================
+# Java / 编译产物
+# ==========================
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+*.log
+
+# ==========================
+# IDE / 编辑器
+# ==========================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+
+# ==========================
+# OS / 系统文件
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# 证书 / 密钥
+# ==========================
+*.pem
+*.key
+*.crt
+*.p12
+*.der
+*.pfx
+*.p7b
+*.p7c
+
+# ==========================
+# Halo 主题 / 打包文件
+# ==========================
+dist/
+*.zip
+*.tmp
+*.bak
+*.old
+*.orig
+*.rej
+*.log
+*.swp
+*.swo
+*.DS_Store
