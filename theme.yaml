@@ -31,6 +31,6 @@ spec:
   website: https://github.com/giftF/blog-ui
   repo: https://github.com/giftF/blog-ui.git
   settingName: "blog-ui-setting"
-  configMapName: "halo-theme-chirpy-configMap"
+  configMapName: "blog-ui-configMap"
   version: 1.4.9
   require: ">=2.0.0"

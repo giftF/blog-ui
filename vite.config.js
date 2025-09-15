@@ -1,12 +1,12 @@
-import {defineConfig} from 'vite';
-import {fileURLToPath} from 'url';
-import inject from '@rollup/plugin-inject';
+import { defineConfig } from 'vite'
+import { fileURLToPath } from 'url'
+import inject from '@rollup/plugin-inject'
 
-import path from 'path';
+import path from 'path'
 
 export default defineConfig({
   root: 'src',
-  base: '/themes/halo-theme-chirpy/assets/dist/',
+  base: '/themes/blog-ui/assets/dist/',
   build: {
     outDir: fileURLToPath(new URL('./templates/assets/dist/', import.meta.url)),
     emptyOutDir: true,
@@ -41,4 +41,4 @@ export default defineConfig({
   server: {
     origin: 'http://localhost:5173'
   }
-});
+})
