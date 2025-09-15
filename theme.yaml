@@ -22,11 +22,11 @@ spec:
         description: 相册页面
         screenshot:
         file: photo.html
-  displayName: Chirpy
+  displayName: blog-ui
   author:
     name: gift
     website: https://·127.0.0.1:8090
-  description: A minimal, responsive and feature-rich Halo theme for technical writing.
+  description: 这是初期版本，有什么意见或者建议，可以通过git联系我，谢谢支持。
   logo: https://github.com/giftF/blog-ui/blob/main/templates/assets/img/favicons/apple-touch-icon.png?raw=true
   website: https://github.com/giftF/blog-ui
   repo: https://github.com/giftF/blog-ui.git
