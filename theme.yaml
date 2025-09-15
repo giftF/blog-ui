@@ -27,7 +27,7 @@ spec:
     name: gift
     website: https://·127.0.0.1:8090
   description: A minimal, responsive and feature-rich Halo theme for technical writing.
-  _logo: TODOhttps://chirpy-img.netlify.app/commons/avatar.jpg
+  logo: http://photogzmaz.photo.store.qq.com/psc?/V503v8k42qVqzd347thW35t3Cg3PGM5j/u1t9cOvsyVOSjfy1UV.fOiaqvsSm9iTEPFA7czsqXr.LZpZCoKro1*qa2UMYHYZ*6oYzST6NxihSDpY6mzi1.*A2l1l6Zl9ej0ZIzcGgp6Y!/b&bo=OAQ4BAAAAAAHByY!&rf=viewer_4
   website: https://github.com/giftF/blog-ui
   repo: https://github.com/giftF/blog-ui.git
   settingName: "blog-ui-setting"
