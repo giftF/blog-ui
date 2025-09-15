@@ -25,6 +25,7 @@
           <div class="gallery">
             <th:block th:each="photo, index : ${photos}">
               <img th:onclick="'openLightbox('+${index.index}+')'" th:src="${photo.spec.url}" class="ima"
+                th:attr="data-desc=${photo.spec.description}"
                 th:style="${'transform: rotate(' + (T(java.lang.Math).random() * 90 - 45) + 'deg)'}">
             </th:block>
           </div>
@@ -33,9 +34,20 @@
         <div class="lightbox" id="lightbox">
           <span class="close" onclick="closeLightbox()">&times;</span>
           <span class="prev" onclick="changePhoto(-1)">&#10094;</span>
-          <img id="lightbox-img" src="" alt="放大图">
+          <div id="lightbox-content" style="display: flex; align-items: center; justify-content: center; height: 100%;">
+            <img id="lightbox-img" src="" alt="放大图" style="max-width: 70vw; max-height: 80vh;">
+            <div id="lightbox-desc" style="color:white;max-width:20%;text-align:left;margin-right:2rem;display:none;">
+            </div>
+          </div>
           <span class="next" onclick="changePhoto(1)">&#10095;</span>
         </div>
+
+        <!-- <div class="lightbox" id="lightbox">
+          <span class="close" onclick="closeLightbox()">&times;</span>
+          <span class="prev" onclick="changePhoto(-1)">&#10094;</span>
+          <img id="lightbox-img" src="" alt="放大图">
+          <span class="next" onclick="changePhoto(1)">&#10095;</span>
+        </div> -->
       </th:block>
 
     </main>

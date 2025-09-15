@@ -121,6 +121,28 @@
     }
 
     /* 灯箱样式 */
+
+    #lightbox-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    /* 手机端：竖排排列，图片在上，描述在下 */
+    @media (max-width: 600px) {
+      #lightbox-content {
+        flex-direction: column;
+      }
+
+      #lightbox-desc {
+        margin-left: 0;
+        margin-top: 1rem;
+        max-width: 90%;
+        text-align: center;
+      }
+    }
+
     .lightbox {
       display: none;
       position: fixed;
@@ -172,14 +194,33 @@
   <script>
     let currentIndex = 0
     let photoUrls = []
+    let photoDescs = []
 
     function openLightbox (index) {
       const images = document.querySelectorAll(".gallery img")
       photoUrls = Array.from(images).map(img => img.src)
+      photoDescs = Array.from(images).map(img => img.getAttribute('data-desc') || '')
       currentIndex = index
       document.getElementById("lightbox-img").src = photoUrls[currentIndex]
+      const desc = photoDescs[currentIndex]
+      const descDiv = document.getElementById("lightbox-desc")
+      if (desc && desc.trim() !== "") {
+        descDiv.innerText = desc
+        descDiv.style.display = "block"
+      } else {
+        descDiv.innerText = ""
+        descDiv.style.display = "none"
+      }
       document.getElementById("lightbox").style.display = "block"
     }
+
+    // function openLightbox (index) {
+    //   const images = document.querySelectorAll(".gallery img")
+    //   photoUrls = Array.from(images).map(img => img.src)
+    //   currentIndex = index
+    //   document.getElementById("lightbox-img").src = photoUrls[currentIndex]
+    //   document.getElementById("lightbox").style.display = "block"
+    // }
 
     function closeLightbox () {
       document.getElementById("lightbox").style.display = "none"
@@ -190,7 +231,23 @@
       if (currentIndex < 0) currentIndex = photoUrls.length - 1
       if (currentIndex >= photoUrls.length) currentIndex = 0
       document.getElementById("lightbox-img").src = photoUrls[currentIndex]
+      const desc = photoDescs[currentIndex]
+      const descDiv = document.getElementById("lightbox-desc")
+      if (desc && desc.trim() !== "") {
+        descDiv.innerText = desc
+        descDiv.style.display = "block"
+      } else {
+        descDiv.innerText = ""
+        descDiv.style.display = "none"
+      }
     }
+
+    // function changePhoto (step) {
+    //   currentIndex += step
+    //   if (currentIndex < 0) currentIndex = photoUrls.length - 1
+    //   if (currentIndex >= photoUrls.length) currentIndex = 0
+    //   document.getElementById("lightbox-img").src = photoUrls[currentIndex]
+    // }
   </script>
 
 
