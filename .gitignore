@@ -82,3 +82,4 @@ dist/
 *.swo
 *.DS_Store
 ._*
+.gradle/*
