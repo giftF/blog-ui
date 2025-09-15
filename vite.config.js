@@ -8,7 +8,7 @@ export default defineConfig({
   root: 'src',
   base: '/themes/blog-ui/assets/dist/',
   build: {
-    outDir: fileURLToPath(new URL('./templates/assets/dist/', import.meta.url)),
+    outDir: fileURLToPath(new URL('./templates/blog-ui/assets/dist/', import.meta.url)),
     emptyOutDir: true,
     minify: true,
     cssMinify: true,
