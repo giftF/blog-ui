@@ -81,3 +81,4 @@ dist/
 *.swp
 *.swo
 *.DS_Store
+._*
