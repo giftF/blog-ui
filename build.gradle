@@ -2,7 +2,7 @@ plugins {
   id 'java'
 }
 
-group 'cn.airbozh'
+group 'cn.gift'
 version '1.0'
 
 repositories {

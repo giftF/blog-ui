@@ -16,19 +16,19 @@
     "halo-theme"
   ],
   "author": {
-    "name": "AirboZH",
-    "url": "https://airbozh.cn",
-    "email": "i@airbozh.cn"
+    "name": "gift",
+    "_url": "TODO",
+    "email": "gift.qf@gmail.com"
   },
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AirboZH/halo-theme-chirpy.git"
+    "url": "https://github.com/giftF/blog-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/AirboZH/halo-theme-chirpy/issues"
+    "url": "https://github.com/giftF/blog-ui/issues"
   },
-  "homepage": "https://github.com/AirboZH/halo-theme-chirpy",
+  "homepage": "https://github.com/giftF/blog-ui",
   "devDependencies": {
     "@rollup/plugin-inject": "^5.0.3",
     "archiver": "^6.0.1",
